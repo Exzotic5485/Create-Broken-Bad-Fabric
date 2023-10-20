@@ -1,6 +1,7 @@
 package com.jetpacker06.CreateBrokenBad.item;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -17,6 +18,6 @@ public class BrassCallBellBlockItem extends BlockItem {
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltip, TooltipFlag pFlag) {
-        pTooltip.add(Component.translatable("brass_call_bell_tooltip"));
+        pTooltip.add(new TranslatableComponent("brass_call_bell_tooltip"));
     }
 }

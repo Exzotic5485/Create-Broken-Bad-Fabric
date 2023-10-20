@@ -7,21 +7,15 @@ import com.tterrag.registrate.util.entry.FluidEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandler;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
-import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRenderHandler;
-import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRendering;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariantAttributeHandler;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.material.FluidState;
 
 import javax.annotation.Nullable;
 
@@ -65,9 +59,9 @@ public class CBBFluids {
      */
     public static FluidBuilder<SimpleFlowableFluid.Flowing, Registrate> basicFluid(String name, int color) {
         return REGISTRATE.fluid(name, still, flow)
-                .fluidAttributes(() -> new CreateAttributeHandler(name, 500, 500))
-                .fluidProperties(p -> p.tickRate(5).blastResistance(100f))
-                .source(SimpleFlowableFluid.Source::new);
+                .attributes((a) -> new CreateAttributeHandler(name, 500, 500))
+                .properties(p -> p.tickRate(5).blastResistance(100f))
+                .source(SimpleFlowableFluid.Still::new);
     }
     public static ItemEntry<BucketItem> getBucket(FluidBuilder<SimpleFlowableFluid.Flowing, Registrate> fluid) {
         return fluid.bucket().properties(p -> p.stacksTo(1)).register();
@@ -119,7 +113,7 @@ public class CBBFluids {
 
     @Environment(EnvType.CLIENT)
     public static void initRendering() {
-        FluidRenderHandlerRegistry.INSTANCE.register(LIQUID_BLUE_METHAMPHETAMINE.getSource(), LIQUID_BLUE_METHAMPHETAMINE.get(), new SimpleFluidRenderHandler(
+        FluidRenderHandlerRegistry.INSTANCE.register(LIQUID_BLUE_METHAMPHETAMINE.get().getSource(), LIQUID_BLUE_METHAMPHETAMINE.get(), new SimpleFluidRenderHandler(
                 new ResourceLocation("minecraft:block/water_still"),
                 new ResourceLocation("minecraft:block/water_flow"),
                 0xff42ddf5
@@ -128,7 +122,7 @@ public class CBBFluids {
 
     private record CreateAttributeHandler(Component name, int viscosity, boolean lighterThanAir) implements FluidVariantAttributeHandler {
         private CreateAttributeHandler(String key, int viscosity, int density) {
-            this(Component.translatable(key), viscosity, density <= 0);
+            this(new TranslatableComponent(key), viscosity, density <= 0);
         }
 
         @Override
