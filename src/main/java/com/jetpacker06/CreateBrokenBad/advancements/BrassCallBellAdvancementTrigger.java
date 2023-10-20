@@ -3,8 +3,8 @@ package com.jetpacker06.CreateBrokenBad.advancements;
 import com.google.gson.JsonObject;
 import com.jetpacker06.CreateBrokenBad.CreateBrokenBad;
 import net.minecraft.advancements.critereon.AbstractCriterionTriggerInstance;
-import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.DeserializationContext;
+import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -23,14 +23,14 @@ public class BrassCallBellAdvancementTrigger extends SimpleCriterionTrigger<Bras
     }
 
     @Override
-    protected @NotNull TriggerInstance createInstance(@NotNull JsonObject json, @NotNull ContextAwarePredicate predicate, @NotNull DeserializationContext conditionsParser) {
-        return new TriggerInstance(predicate);
+    protected @NotNull TriggerInstance createInstance(@NotNull JsonObject json, @NotNull EntityPredicate.Composite player, @NotNull DeserializationContext conditionsParser) {
+        return new TriggerInstance(player);
     }
 
     public static class TriggerInstance extends AbstractCriterionTriggerInstance
     {
-        public TriggerInstance(ContextAwarePredicate predicate) {
-            super(BrassCallBellAdvancementTrigger.ID, predicate);
+        public TriggerInstance(EntityPredicate.Composite player) {
+            super(BrassCallBellAdvancementTrigger.ID, player);
         }
 
         public boolean test() {
