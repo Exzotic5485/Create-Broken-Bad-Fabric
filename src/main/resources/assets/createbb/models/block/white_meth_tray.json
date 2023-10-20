@@ -1,0 +1,7 @@
+{
+	"parent": "createbb:block/tray",
+	"textures": {
+		"0": "createbb:block/white_meth_tray",
+		"particle": "createbb:block/white_meth_tray"
+	}
+}

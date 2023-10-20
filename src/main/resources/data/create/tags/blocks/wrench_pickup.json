@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "createbb:tray",
+    "createbb:blue_meth_tray",
+    "createbb:white_meth_tray",
+    "createbb:brass_call_bell",
+    "createbb:trapped_brass_call_bell"
+  ]
+}
