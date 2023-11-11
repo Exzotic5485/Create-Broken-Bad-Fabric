@@ -26,7 +26,6 @@ public class VillagerTrades {
         registerDefaultTrades(VillagerProfession.LEATHERWORKER);
         registerDefaultTrades(VillagerProfession.LIBRARIAN);
         registerDefaultTrades(VillagerProfession.MASON);
-        registerDefaultTrades(VillagerProfession.NITWIT);
     }
 
     private static void registerDefaultTrades(VillagerProfession profession) {
