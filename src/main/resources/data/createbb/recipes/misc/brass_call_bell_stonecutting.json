@@ -1,7 +1,7 @@
 {
   "type": "minecraft:stonecutting",
   "ingredient": {
-    "tag": "forge:storage_blocks/brass"
+    "tag": "c:brass_blocks"
   },
   "result": "createbb:brass_call_bell",
   "count": 1
